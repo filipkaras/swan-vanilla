@@ -34,7 +34,7 @@ class TodoModel extends CoreModel
             $query->limit($limit);
             $query->offset($offset);
 
-            return $query->execute()->fetchAll();
+            return $query->execute()->setFormat(\Dibi\Type::DATE, 'Y-m-d')->setFormat(\Dibi\Type::DATETIME, 'Y-m-d H:i:s')->fetchAll();
         }
     }
 

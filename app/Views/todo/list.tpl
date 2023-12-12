@@ -14,10 +14,11 @@
             <table class="datatable">
                 <thead>
                 <tr>
-                    <td>ID</td>
+                    <th>ID</th>
+                    <th>Date Created</th>
                     <th>To-do</th>
                     <th>Completed</th>
-                    <td>Action</td>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -31,7 +32,15 @@
         "bServerSide": true,
         "sAjaxSource": "/todo/ajaxData",
         "bProcessing": true,
-        "stateSave": true
+        "stateSave": true,
+        "order": [[1, 'desc']],
+        "aoColumns": [
+            { "bSortable": true },
+            { "bSortable": true },
+            { "bSortable": true },
+            { "bSortable": true },
+            { "bSortable": false }
+        ]
     });
 </script>
 {/block}

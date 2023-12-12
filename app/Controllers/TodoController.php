@@ -116,8 +116,9 @@ class TodoController extends CoreController
     {
         $rowList = [
             0 => 'id',
-            1 => 'todo',
-            2 => 'completed'
+            1 => 'created',
+            2 => 'todo',
+            3 => 'completed'
         ];
 
         $offset = $_GET['iDisplayStart'];
@@ -144,9 +145,10 @@ class TodoController extends CoreController
 
             $resultPart = [
                 0 => $item['id'],
-                1 => $item['todo'],
-                2 => $item['completed'] ? 'Yes' : 'No',
-                3 => $menu
+                1 => date('j.n.Y H:i:s', strtotime($item['created'])),
+                2 => $item['todo'],
+                3 => $item['completed'] ? 'Yes' : 'No',
+                4 => $menu
             ];
             $result[] = $resultPart;
         }
