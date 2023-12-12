@@ -12,14 +12,7 @@
                         <th>Completed</th>
                     </tr>
                     </thead>
-                    <tbody>
-                        {foreach $todos as $todo}
-                        <tr>
-                            <td>{$todo['todo']}</td>
-                            <td>{if $todo['completed']}Áno{else}Nie{/if}</td>
-                        </tr>
-                        {/foreach}
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -28,7 +21,9 @@
 {block name="script"}
 <script>
     $('.datatable').DataTable({
-        ajax: '/todo/ajaxData'
+        "bServerSide": true,
+        "sAjaxSource": "/todo/ajaxData",
+        "bProcessing": true,
     });
 </script>
 {/block}
