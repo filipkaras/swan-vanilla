@@ -73,7 +73,11 @@ class TodoController extends CoreController
 
         $form->setRenderer(new BootstrapFormRenderer());
 
-        $form->addText('todo', 'To-do');
+        $form->addText('todo', 'To-do *')
+             ->addRule(FORM::Filled, 'Please enter to-do')
+             ->addRule(FORM::MaxLength, 'Max length of to-do is 100 characters', 100);
+
+        $form->addTextArea('description', 'Description');
 
         $form->addCheckbox('completed', 'Completed');
 
