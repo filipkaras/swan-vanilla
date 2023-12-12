@@ -4,6 +4,11 @@ namespace Models;
 
 class TodoModel extends CoreModel
 {
+    public function getTodo($id)
+    {
+        return $this->database->select('*')->from('todos')->where('id = %i', $id)->fetch();
+    }
+
     public function getTodos($count = false, $search = '', $limit = 10, $offset = 0, $sortRow = 'todo', $sortDir = 'DESC')
     {
         if ($search) {
@@ -41,5 +46,15 @@ class TodoModel extends CoreModel
     public function reopenTodo($id)
     {
         return $this->database->query('UPDATE todos SET', ['completed' => 0], 'WHERE id = %i', $id);
+    }
+
+    public function createTodo($values)
+    {
+        return $this->database->query('INSERT INTO todos', $values);
+    }
+
+    public function updateTodo($id, $values)
+    {
+        return $this->database->query('UPDATE todos SET', $values, 'WHERE id = %i', $id);
     }
 }

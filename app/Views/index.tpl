@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="container">
+    {include file="inc/result.tpl"}
     {block name="body"}{/block}
 </div>
 <!-- jQuery -->

@@ -6,10 +6,9 @@
             <h1>To-do list</h1>
         </div>
         <div class="col-md-4 text-end">
-            <button type="button" class="btn btn-primary">New to-do</button>
+            <a href="/todo/create" type="button" class="btn btn-primary">New to-do</a>
         </div>
     </div>
-    {include file="inc/result.tpl"}
     <div class="row mt-4">
         <div class="col-md-12">
             <table class="datatable">
