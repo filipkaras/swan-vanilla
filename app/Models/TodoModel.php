@@ -29,7 +29,17 @@ class TodoModel extends CoreModel
             $query->limit($limit);
             $query->offset($offset);
 
-            return $query->execute()->setFormat(\Dibi\Type::DATE, 'd.m.Y')->setFormat(\Dibi\Type::DATETIME, 'd.m.Y H:i:s')->fetchAll();
+            return $query->execute()->fetchAll();
         }
+    }
+
+    public function completeTodo($id)
+    {
+        return $this->database->query('UPDATE todos SET', ['completed' => 1], 'WHERE id = %i', $id);
+    }
+
+    public function reopenTodo($id)
+    {
+        return $this->database->query('UPDATE todos SET', ['completed' => 0], 'WHERE id = %i', $id);
     }
 }
