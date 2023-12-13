@@ -30,6 +30,10 @@ Implementujte autentifikáciu do aplikácie v čistom PHP. Každý používateľ
 
 5. Inštalácia composer balíčkov
    - pred správny chod aplikácie je potrebná inštalácia composer balíčkov spustením príkazu "composer install" v adresári projektu
+  
+6. Nastavenie práv pre adresár writable
+   - pre adresár writable je potrebné nastaviť práva na 770
+   - do adresára ukladáme kompilované templaty
 
 ## 📝  Požiadavky:
 
