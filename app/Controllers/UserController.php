@@ -39,7 +39,7 @@ class UserController extends CoreController
         $form->addPassword('password', 'Password')
              ->addRule(FORM::Filled, 'Please enter password');
 
-        $form->addSubmit('submit', 'Sign in');
+        $form->addSubmit('submit', 'Login');
 
         return $form;
     }

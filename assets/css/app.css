@@ -1,0 +1,12 @@
+.auth {
+  background-image: url("/assets/img/swan.webp");
+  background-color: #f2ece6;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.auth .card {
+  opacity: 0.9;
+}

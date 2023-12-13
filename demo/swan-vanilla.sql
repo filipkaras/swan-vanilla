@@ -30,7 +30,7 @@ CREATE TABLE `todos` (
   `created` timestamp NULL DEFAULT current_timestamp(),
   `updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of todos
@@ -186,10 +186,6 @@ INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `creat
 INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (148, 'Hug Mom :)', NULL, 0, 2, '2023-01-23 23:46:03', '2023-12-13 09:41:07');
 INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (149, 'Play cricket', NULL, 0, 2, '2023-10-22 11:10:13', '2023-12-13 09:41:07');
 INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (150, 'Sleeeeep for the whole day!!!', NULL, 0, 2, '2023-11-07 21:58:26', '2023-12-13 09:41:07');
-INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (151, 'skuska', NULL, NULL, 2, '2023-12-12 19:35:55', '2023-12-13 09:41:07');
-INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (152, 'Skuska 3', NULL, 0, 2, '2023-12-12 19:35:55', '2023-12-13 09:41:07');
-INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (153, 'Skuska 3', NULL, 0, 2, '2023-12-12 19:52:43', '2023-12-13 09:41:07');
-INSERT INTO `todos` (`id`, `todo`, `description`, `completed`, `user_id`, `created`, `updated`) VALUES (154, 'test4', NULL, 0, 1, '2023-12-13 09:41:50', '2023-12-13 09:42:01');
 COMMIT;
 
 -- ----------------------------
