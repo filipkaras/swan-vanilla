@@ -7,6 +7,7 @@
         </div>
         <div class="col-md-4 text-end">
             <a href="/todo/create" type="button" class="btn btn-primary">New to-do</a>
+            <a onclick="return confirm('Are you sure you want to sign out?')" href="/auth/signOut" type="button" class="btn btn-danger">Sign Out</a>
         </div>
     </div>
     <div class="row mt-4">

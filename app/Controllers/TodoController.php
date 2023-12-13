@@ -8,14 +8,26 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 
 class TodoController extends CoreController
 {
-    private $form;
+    private Form $form;
+    private object $user;
 
-    public function index()
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (empty($_SESSION['user'])) {
+            redirect('/auth/signIn');
+        }
+
+        $this->user = $_SESSION['user'];
+    }
+
+    public function index(): void
     {
         $this->smarty->display('todo/list.tpl');
     }
 
-    public function complete($id = null)
+    public function complete($id = null): void
     {
         if (!$id) redirect('/todos');
 
@@ -29,7 +41,7 @@ class TodoController extends CoreController
         redirect('/todos');
     }
 
-    public function reopen($id = null)
+    public function reopen($id = null): void
     {
         if (!$id) redirect('/todos');
 
@@ -43,7 +55,7 @@ class TodoController extends CoreController
         redirect('/todos');
     }
 
-    function create()
+    public function create(): void
     {
         $this->form = $this->generateForm();
         $this->processForm();
@@ -54,7 +66,7 @@ class TodoController extends CoreController
         $this->smarty->display('todo/form.tpl');
     }
 
-    function update($id = null)
+    public function update($id = null): void
     {
         if (!$id) redirect('/todos');
 
@@ -67,7 +79,7 @@ class TodoController extends CoreController
         $this->smarty->display('todo/form.tpl');
     }
 
-    function generateForm()
+    private function generateForm(): Form
     {
         $form = new Form('todo');
 
@@ -86,7 +98,7 @@ class TodoController extends CoreController
         return $form;
     }
 
-    function processForm($id = null)
+    private function processForm($id = null): void
     {
         if ($this->form->isSubmitted())
         {
@@ -100,9 +112,11 @@ class TodoController extends CoreController
         }
     }
 
-    function save($values, $id = null)
+    private function save($values, $id = null): void
     {
         foreach ($values as $key => $value) if ($value === '') $values[$key] = null;
+
+        $values['user_id'] = $this->user['id'];
 
         $todoModel = new TodoModel();
         if ($id) {
@@ -116,7 +130,7 @@ class TodoController extends CoreController
         redirect('/todos');
     }
 
-    public function ajaxData()
+    public function ajaxData(): void
     {
         $rowList = [
             0 => 'id',
@@ -133,9 +147,9 @@ class TodoController extends CoreController
         $sEcho = $_GET['sEcho'];
 
         $todoModel = new TodoModel();
-        $data = $todoModel->getTodos(false, $_GET['sSearch'], $limit, $offset, $sortRow, $sortDir);
-        $count = $todoModel->getTodos(true, $_GET['sSearch']);
-        $countTotal = $todoModel->getTodos(true);
+        $data = $todoModel->getTodos($this->user['id'], false, $_GET['sSearch'], $limit, $offset, $sortRow, $sortDir);
+        $count = $todoModel->getTodos($this->user['id'], true, $_GET['sSearch']);
+        $countTotal = $todoModel->getTodos($this->user['id'], true);
 
         $result = [];
         foreach ($data as $item) {

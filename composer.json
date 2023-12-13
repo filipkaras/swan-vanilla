@@ -1,4 +1,7 @@
 {
+    "platform": {
+        "php": "8.2"
+    },
     "require": {
         "dibi/dibi": "^4.2",
         "smarty/smarty": "^4.3",

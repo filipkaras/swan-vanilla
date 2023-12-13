@@ -6,8 +6,8 @@ use Smarty;
 
 class CoreController
 {
-    protected $smarty;
-    private $flashMessages;
+    protected Smarty $smarty;
+    private Array $flashMessages;
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ class CoreController
         $this->smarty->assign('flashMessages', $flashMessages);
     }
 
-    public function flashMessage($type, $msg)
+    protected function flashMessage($type, $msg): void
     {
         $this->flashMessages[] = [$type => $msg];
         $_SESSION['flash_messages'] = $this->flashMessages;

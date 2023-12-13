@@ -2,14 +2,17 @@
 
 namespace Models;
 
+use Dibi\Result;
+use Dibi\Row;
+
 class TodoModel extends CoreModel
 {
-    public function getTodo($id)
+    public function getTodo($id): array|Row|null
     {
         return $this->database->select('*')->from('todos')->where('id = %i', $id)->fetch();
     }
 
-    public function getTodos($count = false, $search = '', $limit = 10, $offset = 0, $sortRow = 'todo', $sortDir = 'DESC')
+    public function getTodos($idUser, $count = false, $search = '', $limit = 10, $offset = 0, $sortRow = 'todo', $sortDir = 'DESC')
     {
         if ($search) {
             $filter = [
@@ -21,11 +24,11 @@ class TodoModel extends CoreModel
             ? $this->database->select('COUNT(0)')
             : $this->database->select('*');
 
+        $query->where('user_id = %i', $idUser);
         if (!empty($filter)) $query->where($filter);
 
         $query
             ->from('todos');
-            //->leftJoin('app_device_rent')->on('device_rent_id_device = terminal_id_device')
 
         if ($count) {
             return ($cnt = $query->fetchSingle()) ? $cnt : '0';
@@ -38,22 +41,22 @@ class TodoModel extends CoreModel
         }
     }
 
-    public function completeTodo($id)
+    public function completeTodo($id): Result
     {
         return $this->database->query('UPDATE todos SET', ['completed' => 1], 'WHERE id = %i', $id);
     }
 
-    public function reopenTodo($id)
+    public function reopenTodo($id): Result
     {
         return $this->database->query('UPDATE todos SET', ['completed' => 0], 'WHERE id = %i', $id);
     }
 
-    public function createTodo($values)
+    public function createTodo($values): Result
     {
         return $this->database->query('INSERT INTO todos', $values);
     }
 
-    public function updateTodo($id, $values)
+    public function updateTodo($id, $values): Result
     {
         return $this->database->query('UPDATE todos SET', $values, 'WHERE id = %i', $id);
     }
