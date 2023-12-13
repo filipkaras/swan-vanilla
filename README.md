@@ -1,4 +1,4 @@
-# **SWAN PHP Developer Test**
+# **SWAN PHP Developer Test (Vanilla version)**
 
 ## 👀  Popis
 
@@ -54,5 +54,7 @@ Bramus Router - routing v rámci MVC<br />
 jQuery - pre prácu s JS + DataTables<br />
 Bootstrap - grid layout + základný dizajn<br />
 DataTables - pre prácu s tabuľkami<br />
+
+Ochrana proti SQL injection je zabezpečená pomocou databázového layera Dibi a ochrana formulárot je zabezpečená knižnicou Nette Forms.
 
 Po spustení aplikácie bude užívateľ presmerovaný na prihlasovaciu stránku. Po úspešnom prihlásení sa mu zobrazí zoznam jeho úloh v prehladnej tabuľke. Dáta sú načítavané AJAXom pre rýchlejšie zobrazenie a odľahčenie databázy pri väčšom objeme dát. Dáta je možné zoraďovať podľa ktoréhokoľvek stĺpca a zároveň v nich aj vyhľadávať. Užívateľ má tiež možnosť pridať novú ulohu (to-to), upraviť úlohu, prípadne ju označiť ako hotovú alebo znovu otvoriť.
