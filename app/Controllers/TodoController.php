@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
-use Models\TodoModel;
+use App\Models\TodoModel;
 use Nette\Forms\Form;
 use Nette\Forms\Rendering\BootstrapFormRenderer;
 

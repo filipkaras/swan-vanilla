@@ -18,7 +18,7 @@ require_once __DIR__ . '/app/Models/UserModel.php';
 // Create Router instance
 $router = new Router();
 
-$router->setNamespace('Controllers');
+$router->setNamespace('App\Controllers');
 
 // Define routes
 $router->get('/', 'TodoController@index');
