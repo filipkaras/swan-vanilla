@@ -32,7 +32,7 @@ class TodoRepository extends Repository
     public function processForm(?int $id = null): bool|null
     {
         $todoModel = new TodoModel();
-        if (!$todoModel->canUpdateTask($id, $this->user['id'])) {
+        if ($id && $this->user['id'] && !$todoModel->canUpdateTask($id, $this->user['id'])) {
             http_response_code(403);
             die('Forbidden');
         }
