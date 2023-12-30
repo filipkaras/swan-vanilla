@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Smarty;
 
-class CoreController
+abstract class CoreController
 {
     protected Smarty $smarty;
     private Array $flashMessages;

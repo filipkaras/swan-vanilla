@@ -4,23 +4,14 @@ namespace App\Controllers;
 
 use App\Models\TodoModel;
 use App\Repositories\TodoRepository;
-use Nette\Forms\Form;
-use Nette\Forms\Rendering\BootstrapFormRenderer;
 
-class TodoController extends CoreController
+class TodoController extends AuthController
 {
-    private object $user;
     private TodoRepository $todoRepository;
 
     public function __construct()
     {
         parent::__construct();
-
-        if (empty($_SESSION['user'])) {
-            redirect('/auth/signIn');
-        }
-
-        $this->user = $_SESSION['user'];
 
         $this->todoRepository = new TodoRepository($this->user);
     }
