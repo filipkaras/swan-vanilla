@@ -29,6 +29,17 @@ class TodoRepository extends Repository
         $this->form->addSubmit('save', 'Save');
     }
 
+    public function processForm(?int $id = null): bool|null
+    {
+        $todoModel = new TodoModel();
+        if (!$todoModel->canUpdateTask($id, $this->user['id'])) {
+            http_response_code(403);
+            die('Forbidden');
+        }
+
+        return parent::processForm($id);
+    }
+
     public function processFormSubmit($values, ?int $id = null): bool
     {
         foreach ($values as $key => $value) if ($value === '') $values[$key] = null;

@@ -41,14 +41,9 @@ class TodoModel extends CoreModel
         }
     }
 
-    public function completeTodo($id): Result
+    public function complete($id, $complete = true): Result
     {
-        return $this->database->query('UPDATE todos SET', ['completed' => 1], 'WHERE id = %i', $id);
-    }
-
-    public function reopenTodo($id): Result
-    {
-        return $this->database->query('UPDATE todos SET', ['completed' => 0], 'WHERE id = %i', $id);
+        return $this->database->query('UPDATE todos SET', ['completed' => (int)$complete], 'WHERE id = %i', $id);
     }
 
     public function createTodo($values): Result
@@ -59,5 +54,10 @@ class TodoModel extends CoreModel
     public function updateTodo($id, $values): Result
     {
         return $this->database->query('UPDATE todos SET', $values, 'WHERE id = %i', $id);
+    }
+
+    public function canUpdateTask($id, $userId)
+    {
+        return $this->database->select('COUNT(0)')->from('todos')->where('id = %i', $id)->where('user_id = %i', $userId)->fetchSingle();
     }
 }

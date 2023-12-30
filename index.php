@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\TodoController;
 use Bramus\Router\Router;
 
 define('MSG_SUCCESS', 1);
@@ -24,8 +25,8 @@ $router->setNamespace('App\Controllers');
 $router->get('/', 'TodoController@index');
 $router->get('/todos', 'TodoController@index');
 $router->get('/todo/ajaxData', 'TodoController@ajaxData');
-$router->get('/todo/reopen/(\d+)', 'TodoController@reopen');
-$router->get('/todo/complete/(\d+)', 'TodoController@complete');
+$router->get('/todo/reopen/(\d+)', function($id) { (new TodoController)->complete($id, false); });
+$router->get('/todo/complete/(\d+)', function($id) { (new TodoController)->complete($id); });
 $router->get('/todo/create', 'TodoController@create');
 $router->post('/todo/create', 'TodoController@create');
 $router->get('/todo/update/(\d+)', 'TodoController@create');

@@ -21,29 +21,15 @@ class TodoController extends AuthController
         $this->smarty->display('todo/list.tpl');
     }
 
-    public function complete($id = null): void
+    public function complete($id = null, $complete = true): void
     {
         if (!$id) redirect('/todos');
 
         $todoModel = new TodoModel();
-        if ($todoModel->completeTodo($id)) {
-            $this->flashMessage(MSG_SUCCESS, 'To-do was successfully completed.');
+        if ($todoModel->complete($id, $complete)) {
+            $this->flashMessage(MSG_SUCCESS, 'To-do was successfully ' . ($complete ? 'completed' : 'reopened') . '.');
         } else {
-            $this->flashMessage(MSG_ERROR, 'Error occurred, could not complete to-do.');
-        }
-
-        redirect('/todos');
-    }
-
-    public function reopen($id = null): void
-    {
-        if (!$id) redirect('/todos');
-
-        $todoModel = new TodoModel();
-        if ($todoModel->reopenTodo($id)) {
-            $this->flashMessage(MSG_SUCCESS, 'To-do was successfully reopened.');
-        } else {
-            $this->flashMessage(MSG_ERROR, 'Error occurred, could not reopen to-do.');
+            $this->flashMessage(MSG_ERROR, 'Error occurred, could not ' . ($complete ? 'complete' : 'reopen') . ' to-do.');
         }
 
         redirect('/todos');
