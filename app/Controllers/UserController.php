@@ -2,20 +2,33 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
 use Nette\Forms\Form;
-use Nette\Forms\Rendering\BootstrapFormRenderer;
+use App\Repositories\UserRepository;
 
 class UserController extends CoreController
 {
-    private Form $form;
+    private UserRepository $userRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->userRepository = new UserRepository();
+    }
 
     public function signIn(): void
     {
-        $this->form = $this->generateForm();
-        $this->processForm();
+        $result = $this->userRepository->processForm();
 
-        $this->smarty->assign('form', $this->form);
+        if ($result === false) {
+            $this->flashMessage(MSG_ERROR, 'Invalid credentials.');
+            redirect('/auth/signIn');
+        }
+        elseif ($result === true) {
+            redirect('/todos');
+        }
+
+        $this->smarty->assign('form', $this->userRepository->form);
 
         $this->smarty->display('auth/sign-in.tpl');
     }
@@ -25,48 +38,5 @@ class UserController extends CoreController
         $_SESSION['user'] = null;
 
         redirect('/auth/signIn');
-    }
-
-    private function generateForm(): Form
-    {
-        $form = new Form('sign-in');
-
-        $form->setRenderer(new BootstrapFormRenderer());
-
-        $form->addText('username', 'Username')
-             ->addRule(FORM::Filled, 'Please enter username');
-
-        $form->addPassword('password', 'Password')
-             ->addRule(FORM::Filled, 'Please enter password');
-
-        $form->addSubmit('submit', 'Login');
-
-        return $form;
-    }
-
-    private function processForm(): void
-    {
-        if ($this->form->isSubmitted())
-        {
-            if ($this->form->isValid())
-            {
-                $this->verifyCredentials($this->form->getValues());
-            }
-        }
-    }
-
-    private function verifyCredentials($values): void
-    {
-        $userModel = new UserModel();
-        $user = $userModel->verifyCredentials($values->username, $values->password);
-
-        if ($user) {
-            unset($user['password']);
-            $_SESSION['user'] =  $user;
-            redirect('/todos');
-        } else {
-            $this->flashMessage(MSG_ERROR, 'Invalid credentials.');
-            redirect('/auth/signIn');
-        }
     }
 }

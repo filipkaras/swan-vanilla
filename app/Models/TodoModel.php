@@ -9,7 +9,7 @@ class TodoModel extends CoreModel
 {
     public function getTodo($id): array|Row|null
     {
-        return $this->database->select('*')->from('todos')->where('id = %i', $id)->fetch();
+        return (array)$this->database->select('*')->from('todos')->where('id = %i', $id)->fetch();
     }
 
     public function getTodos($idUser, $count = false, $search = '', $limit = 10, $offset = 0, $sortRow = 'todo', $sortDir = 'DESC')

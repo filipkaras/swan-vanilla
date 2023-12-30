@@ -28,8 +28,8 @@ $router->get('/todo/reopen/(\d+)', 'TodoController@reopen');
 $router->get('/todo/complete/(\d+)', 'TodoController@complete');
 $router->get('/todo/create', 'TodoController@create');
 $router->post('/todo/create', 'TodoController@create');
-$router->get('/todo/update/(\d+)', 'TodoController@update');
-$router->post('/todo/update/(\d+)', 'TodoController@update');
+$router->get('/todo/update/(\d+)', 'TodoController@create');
+$router->post('/todo/update/(\d+)', 'TodoController@create');
 
 $router->get('/auth/signIn', 'UserController@signIn');
 $router->post('/auth/signIn', 'UserController@signIn');
