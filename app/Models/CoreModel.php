@@ -2,27 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\Database;
 use Dibi\Connection;
-use Dibi\Exception;
 
 class CoreModel
 {
+    use Database;
     protected Connection $database;
 
-    function __construct()
+    public function __construct()
     {
-        $env = parse_ini_file('.env');
-
-        try {
-            $this->database = new Connection([
-                'driver' => 'mysqli',
-                'host' => $env['database.hostname'],
-                'username' => $env['database.username'],
-                'password' => $env['database.password'],
-                'database' => $env['database.database']
-            ]);
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
+        $this->database = $this->connect();
     }
 }
